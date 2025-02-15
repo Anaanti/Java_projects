@@ -138,7 +138,16 @@ public class ExpenseTracker extends Application {
             if(selectedIndex != -1){
                 expenseListView.getItems().remove(selectedIndex);
                 expenses.remove(selectedIndex);
-            }else{
+
+                updatePieChart();
+
+                double totalExpense = 0;
+                for(Expense exp : expenses){
+                    totalExpense += exp.getAmount();
+                }
+                totalExpenseLabel.setText("Total Expense: ₹" + totalExpense);
+            }
+            else{
                 System.out.println("No expense Selected.");
             }
         });
