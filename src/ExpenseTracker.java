@@ -66,6 +66,7 @@ public class ExpenseTracker extends Application {
         categoryComboBox.getItems().addAll("Food", "Entertainment", "Bills", "Transportation", "Healthcare", "Other");
 
         Button addButton = new Button("Add Expense");
+        Button delButton = new Button("Delete Expense");
 
         // Initialize the PieChart
         pieChart = new PieChart();
@@ -82,6 +83,7 @@ public class ExpenseTracker extends Application {
         entryGrid.add(categoryComboBox, 1, 2);
         entryGrid.add(addButton, 1, 3);
         entryGrid.add(totalExpenseLabel, 1, 7);
+        entryGrid.add(delButton, 1 , 7);
 
         // HBox for layout (ListView + PieChart)
         HBox mainLayout = new HBox(20);  // Space between ListView and PieChart
@@ -128,6 +130,16 @@ public class ExpenseTracker extends Application {
                 expenseNameField.clear();
                 amountField.clear();
                 categoryComboBox.getSelectionModel().clearSelection();
+            }
+        });
+
+        delButton.setOnAction(e ->{
+            int selectedIndex = expenseListView.getSelectionModel().getSelectedIndex();
+            if(selectedIndex != -1){
+                expenseListView.getItems().remove(selectedIndex);
+                expenses.remove(selectedIndex);
+            }else{
+                System.out.println("No expense Selected.");
             }
         });
 
